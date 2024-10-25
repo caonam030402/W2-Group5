@@ -54,30 +54,140 @@
 
 ### Session 3: Understanding H2 Database and JDA (Java Database Access)
 
-- **Objective:** Gain a comprehensive understanding of H2 Database and Java Database Access (JDA), focusing on their roles in developing applications with database functionalities.
+#### Documentation Section: Using H2 and JDA
 
-#### Key Topics Covered:
+## Overview
+This section describes how to utilize **H2 Database** and **Java Database Access (JDA)** in our Spring Boot application. These technologies provide a lightweight, in-memory database solution for development and testing, facilitating rapid application development and efficient data management.
 
-1. **Overview of H2 Database:**
-   - H2 is a Java-based SQL database that supports in-memory and persistent storage. It’s fast, reliable, and ideal for development purposes, making it suitable for testing and prototyping.
+## Technologies Used
+1. **H2 Database**
+   - **Description**: H2 is an open-source, lightweight, in-memory SQL database ideal for development, testing, and prototyping. It allows developers to run a database without the need for a separate server installation, making it highly suitable for applications where simplicity and speed are essential.
+   - **Use Cases**:
+     - Quick prototyping of database-driven applications.
+     - Unit testing with a database that resets after each test run.
+     - Development environments that require fast database access without the overhead of a full database server.
 
-2. **Installation:**
-   - Download the H2 Database from the official [H2 Database website](http://www.h2database.com/).
-   - Follow the installation instructions based on your operating system. H2 can also be included as a dependency in your Maven or Gradle project.
+2. **Java Database Access (JDA)**
+   - **Description**: JDA is a framework that simplifies the interaction between Java applications and databases using JPA (Java Persistence API). It provides a set of annotations and interfaces to manage data persistence, enabling developers to perform CRUD operations easily.
+   - **Use Cases**:
+     - Mapping Java objects to database tables.
+     - Executing queries and managing transactions through repository interfaces.
+     - Simplifying database operations with built-in methods provided by JPA, such as `save()`, `findAll()`, and `deleteById()`.
 
-3. **Configuring the Database:**
-   - Add the H2 dependency to your project as shown in Session 2.
-   - In your `application.properties` file, configure the database connection:
+## Implementation Details
 
-   ```properties
-   spring.application.name=session3
-   spring.datasource.url=jdbc:h2:mem:database
-   spring.datasource.driver-class-name=org.h2.Driver
-   spring.datasource.username=admin
-   spring.datasource.password=admin
+- **H2 Configuration**:
+  - The H2 database is configured in the `application.properties` file, enabling the H2 console for easy access during development. The in-memory database is created and managed automatically, allowing for rapid iteration without persistent data storage.
+
+  ```properties
+     spring.application.name=session3
     
-   spring.jpa.show-sql=true
-   spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
-   spring.jpa.hibernate.ddl-auto=update
-   spring.h2.console.enabled=true
-   spring.h2.console.path=/h2
+    spring.datasource.url=jdbc:h2:mem:database
+    spring.datasource.driver-class-name=org.h2.Driver
+    spring.datasource.username=admin
+    spring.datasource.password=admin
+    
+    spring.jpa.show-sql=true
+    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
+    spring.jpa.hibernate.ddl-auto=update
+    spring.h2.console.enabled=true
+    spring.h2.console.path=/h2
+
+
+## JPA Entity Example
+
+The `Product` class serves as a JPA entity, representing a product in the database. It is annotated with `@Entity` and `@Table`, and its fields are mapped to the corresponding columns in the database.
+
+```java
+package team5.session3.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "Products")
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@ToString
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+    private String description;
+    private int price;
+    private String image;
+    private String category;
+    private int priceDiscount;
+    private int quantity;
+    private String unit;
+}
+
+
+## Repository Interface
+
+The `ProductRepo` interface extends `JpaRepository`, allowing seamless integration with JPA to perform standard database operations on `Product` entities without the need for boilerplate code.
+
+```java
+package team5.session3.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import team5.session3.model.Product;
+
+public interface ProductRepo extends JpaRepository<Product, Long> {
+    // Custom query methods can be defined here if needed
+}
+
+## Controller Class Example
+
+The `ProductController` class handles HTTP requests for managing products. It uses the `ProductRepo` interface to perform CRUD operations.
+
+```java
+package team5.session3.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import team5.session3.model.Product;
+import team5.session3.repository.ProductRepo;
+
+import java.util.List;
+
+@RestController
+public class ProductController {
+    private final ProductRepo productRepo;
+
+    @Autowired
+    public ProductController(ProductRepo productRepo) {
+        this.productRepo = productRepo;
+    }
+
+    // GET all products
+    @GetMapping("/getProductList")
+    public ResponseEntity<List<Product>> getAllProduct() {
+        List<Product> productList = productRepo.findAll();
+        return productList.isEmpty()
+            ? ResponseEntity.noContent().build()
+            : ResponseEntity.ok(productList);
+    }
+
+    // Additional CRUD methods can be added here
+}
+
+
+## Using the H2 Console
+
+To interact with the H2 database, you can access the H2 console at [http://localhost:8080/h2](http://localhost:8080/h2). Use the following connection settings:
+
+- **JDBC URL**: `jdbc:h2:mem:database`
+- **Username**: `admin`
+- **Password**: `admin`
+
+## Conclusion
+
+Using H2 and JDA together in our Spring Boot application provides a robust and efficient way to manage data. H2's lightweight nature makes it perfect for development and testing, while JDA simplifies the interaction with the database through powerful annotations and repository patterns. This combination enables rapid application development while maintaining a clean and maintainable codebase.
+
+
+
