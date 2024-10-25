@@ -79,26 +79,26 @@ This section describes how to utilize **H2 Database** and **Java Database Access
 **H2 Configuration**:
 The H2 database is configured in the `application.properties` file, enabling the H2 console for easy access during development. The in-memory database is created and managed automatically, allowing for rapid iteration without persistent data storage.
 
-    ```java
-    spring.application.name=session3
-    
-    spring.datasource.url=jdbc:h2:mem:database
-    spring.datasource.driver-class-name=org.h2.Driver
-    spring.datasource.username=admin
-    spring.datasource.password=admin
-    
-    spring.jpa.show-sql=true
-    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
-    spring.jpa.hibernate.ddl-auto=update
-    spring.h2.console.enabled=true
-    spring.h2.console.path=/h2
-
+  ```java
+      spring.application.name=session3
+      
+      spring.datasource.url=jdbc:h2:mem:database
+      spring.datasource.driver-class-name=org.h2.Driver
+      spring.datasource.username=admin
+      spring.datasource.password=admin
+      
+      spring.jpa.show-sql=true
+      spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
+      spring.jpa.hibernate.ddl-auto=update
+      spring.h2.console.enabled=true
+      spring.h2.console.path=/h2
+  ```
 
 ## JPA Entity Example
 
 The `Product` class serves as a JPA entity, representing a product in the database. It is annotated with `@Entity` and `@Table`, and its fields are mapped to the corresponding columns in the database.
 
-    ```java
+  ```java
     package team5.session3.model;
     
     import jakarta.persistence.*;
@@ -124,13 +124,13 @@ The `Product` class serves as a JPA entity, representing a product in the databa
         private int quantity;
         private String unit;
     }
-
+```
 
 ## Repository Interface
 
 The `ProductRepo` interface extends `JpaRepository`, allowing seamless integration with JPA to perform standard database operations on `Product` entities without the need for boilerplate code.
 
-    ```java
+  ```java
     package team5.session3.repository;
     
     import org.springframework.data.jpa.repository.JpaRepository;
@@ -143,8 +143,8 @@ The `ProductRepo` interface extends `JpaRepository`, allowing seamless integrati
     ## Controller Class Example
     
     The `ProductController` class handles HTTP requests for managing products. It uses the `ProductRepo` interface to perform CRUD operations.
-    
-    ```java
+```
+  ```java
     package team5.session3.controller;
     
     import org.springframework.beans.factory.annotation.Autowired;
@@ -175,7 +175,7 @@ The `ProductRepo` interface extends `JpaRepository`, allowing seamless integrati
     
         // Additional CRUD methods can be added here
     }
-
+```
 
 ## Using the H2 Console
 
