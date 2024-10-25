@@ -79,7 +79,7 @@ This section describes how to utilize **H2 Database** and **Java Database Access
 - **H2 Configuration**:
   - The H2 database is configured in the `application.properties` file, enabling the H2 console for easy access during development. The in-memory database is created and managed automatically, allowing for rapid iteration without persistent data storage.
 
-  ```properties
+     ```java
      spring.application.name=session3
     
     spring.datasource.url=jdbc:h2:mem:database
