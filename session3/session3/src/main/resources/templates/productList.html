@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Product List</h1>
+    <table class="table table-striped mt-3">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Discount Price</th>
+            <th>Quantity</th>
+            <th>Unit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.price}"></td>
+            <td>
+                <img th:src="@{'/images/' + ${product.image}}" th:alt="${product.name}" width="50" />
+            </td>
+            <td th:text="${product.category}"></td>
+            <td th:text="${product.priceDiscount}"></td>
+            <td th:text="${product.quantity}"></td>
+            <td th:text="${product.unit}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/addProduct" class="btn btn-primary">Add Product</a>
+</div>
+</body>
+</html>
