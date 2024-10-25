@@ -98,83 +98,83 @@ This section describes how to utilize **H2 Database** and **Java Database Access
 
 The `Product` class serves as a JPA entity, representing a product in the database. It is annotated with `@Entity` and `@Table`, and its fields are mapped to the corresponding columns in the database.
 
-```java
-package team5.session3.model;
-
-import jakarta.persistence.*;
-import lombok.*;
-
-@Entity
-@Table(name = "Products")
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
-@ToString
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
-    private String description;
-    private int price;
-    private String image;
-    private String category;
-    private int priceDiscount;
-    private int quantity;
-    private String unit;
-}
+    ```java
+    package team5.session3.model;
+    
+    import jakarta.persistence.*;
+    import lombok.*;
+    
+    @Entity
+    @Table(name = "Products")
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Setter
+    @Getter
+    @ToString
+    public class Product {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int id;
+        private String name;
+        private String description;
+        private int price;
+        private String image;
+        private String category;
+        private int priceDiscount;
+        private int quantity;
+        private String unit;
+    }
 
 
 ## Repository Interface
 
 The `ProductRepo` interface extends `JpaRepository`, allowing seamless integration with JPA to perform standard database operations on `Product` entities without the need for boilerplate code.
 
-```java
-package team5.session3.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import team5.session3.model.Product;
-
-public interface ProductRepo extends JpaRepository<Product, Long> {
-    // Custom query methods can be defined here if needed
-}
-
-## Controller Class Example
-
-The `ProductController` class handles HTTP requests for managing products. It uses the `ProductRepo` interface to perform CRUD operations.
-
-```java
-package team5.session3.controller;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import team5.session3.model.Product;
-import team5.session3.repository.ProductRepo;
-
-import java.util.List;
-
-@RestController
-public class ProductController {
-    private final ProductRepo productRepo;
-
-    @Autowired
-    public ProductController(ProductRepo productRepo) {
-        this.productRepo = productRepo;
+    ```java
+    package team5.session3.repository;
+    
+    import org.springframework.data.jpa.repository.JpaRepository;
+    import team5.session3.model.Product;
+    
+    public interface ProductRepo extends JpaRepository<Product, Long> {
+        // Custom query methods can be defined here if needed
     }
-
-    // GET all products
-    @GetMapping("/getProductList")
-    public ResponseEntity<List<Product>> getAllProduct() {
-        List<Product> productList = productRepo.findAll();
-        return productList.isEmpty()
-            ? ResponseEntity.noContent().build()
-            : ResponseEntity.ok(productList);
+    
+    ## Controller Class Example
+    
+    The `ProductController` class handles HTTP requests for managing products. It uses the `ProductRepo` interface to perform CRUD operations.
+    
+    ```java
+    package team5.session3.controller;
+    
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.*;
+    import team5.session3.model.Product;
+    import team5.session3.repository.ProductRepo;
+    
+    import java.util.List;
+    
+    @RestController
+    public class ProductController {
+        private final ProductRepo productRepo;
+    
+        @Autowired
+        public ProductController(ProductRepo productRepo) {
+            this.productRepo = productRepo;
+        }
+    
+        // GET all products
+        @GetMapping("/getProductList")
+        public ResponseEntity<List<Product>> getAllProduct() {
+            List<Product> productList = productRepo.findAll();
+            return productList.isEmpty()
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok(productList);
+        }
+    
+        // Additional CRUD methods can be added here
     }
-
-    // Additional CRUD methods can be added here
-}
 
 
 ## Using the H2 Console
