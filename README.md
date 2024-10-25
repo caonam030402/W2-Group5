@@ -56,10 +56,10 @@
 
 #### Documentation Section: Using H2 and JDA
 
-## Overview
+#### Overview
 This section describes how to utilize **H2 Database** and **Java Database Access (JDA)** in our Spring Boot application. These technologies provide a lightweight, in-memory database solution for development and testing, facilitating rapid application development and efficient data management.
 
-## Technologies Used
+#### Technologies Used
 1. **H2 Database**
    - **Description**: H2 is an open-source, lightweight, in-memory SQL database ideal for development, testing, and prototyping. It allows developers to run a database without the need for a separate server installation, making it highly suitable for applications where simplicity and speed are essential.
    - **Use Cases**:
@@ -74,7 +74,7 @@ This section describes how to utilize **H2 Database** and **Java Database Access
      - Executing queries and managing transactions through repository interfaces.
      - Simplifying database operations with built-in methods provided by JPA, such as `save()`, `findAll()`, and `deleteById()`.
 
-## Implementation Details
+#### Implementation Details
 
 **H2 Configuration**:
 The H2 database is configured in the `application.properties` file, enabling the H2 console for easy access during development. The in-memory database is created and managed automatically, allowing for rapid iteration without persistent data storage.
@@ -94,7 +94,7 @@ The H2 database is configured in the `application.properties` file, enabling the
       spring.h2.console.path=/h2
   ```
 
-## JPA Entity Example
+#### JPA Entity Example
 
 The `Product` class serves as a JPA entity, representing a product in the database. It is annotated with `@Entity` and `@Table`, and its fields are mapped to the corresponding columns in the database.
 
@@ -126,7 +126,7 @@ The `Product` class serves as a JPA entity, representing a product in the databa
     }
 ```
 
-## Repository Interface
+#### Repository Interface
 
 The `ProductRepo` interface extends `JpaRepository`, allowing seamless integration with JPA to perform standard database operations on `Product` entities without the need for boilerplate code.
 
@@ -177,7 +177,7 @@ The `ProductRepo` interface extends `JpaRepository`, allowing seamless integrati
     }
 ```
 
-## Using the H2 Console
+#### Using the H2 Console
 
 To interact with the H2 database, you can access the H2 console at [http://localhost:8080/h2](http://localhost:8080/h2). Use the following connection settings:
 
@@ -185,7 +185,7 @@ To interact with the H2 database, you can access the H2 console at [http://local
 - **Username**: `admin`
 - **Password**: `admin`
 
-## Conclusion
+#### Conclusion
 
 Using H2 and JDA together in our Spring Boot application provides a robust and efficient way to manage data. H2's lightweight nature makes it perfect for development and testing, while JDA simplifies the interaction with the database through powerful annotations and repository patterns. This combination enables rapid application development while maintaining a clean and maintainable codebase.
 
