@@ -1,9 +1,5 @@
 # W2-Group4 Project
 
-## Introduction
-
-The W2-Group4 project is part of a programming course aimed at developing coding skills and teamwork. Throughout this project, we will engage in three main sessions to establish a solid foundation.
-
 ## Session Overview
 
 ### Session 1: Introduction and IDE Setup
