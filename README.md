@@ -37,19 +37,19 @@
 3. **Install Dependencies:**
    - Use Maven or Gradle to add necessary libraries to your project. Ensure to add dependencies like Spring Boot, JPA, or any other relevant libraries.
 
-Example `pom.xml` snippet for Maven:
-   ```xml
-   <dependencies>
-       <dependency>
-           <groupId>org.springframework.boot</groupId>
-           <artifactId>spring-boot-starter-data-jpa</artifactId>
-       </dependency>
-       <dependency>
-           <groupId>com.h2database</groupId>
-           <artifactId>h2</artifactId>
-           <scope>runtime</scope>
-       </dependency>
-   </dependencies>
+    Example `pom.xml` snippet for Maven:
+     ```xml
+     <dependencies>
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-data-jpa</artifactId>
+         </dependency>
+         <dependency>
+             <groupId>com.h2database</groupId>
+             <artifactId>h2</artifactId>
+             <scope>runtime</scope>
+         </dependency>
+     </dependencies>
 
 
 ### Session 3: Understanding H2 Database and JDA (Java Database Access)
