@@ -37,7 +37,7 @@
 3. **Install Dependencies:**
    - Use Maven or Gradle to add necessary libraries to your project. Ensure to add dependencies like Spring Boot, JPA, or any other relevant libraries.
 
-   Example `pom.xml` snippet for Maven:
+Example `pom.xml` snippet for Maven:
    ```xml
    <dependencies>
        <dependency>
@@ -76,11 +76,11 @@ This section describes how to utilize **H2 Database** and **Java Database Access
 
 ## Implementation Details
 
-- **H2 Configuration**:
-  - The H2 database is configured in the `application.properties` file, enabling the H2 console for easy access during development. The in-memory database is created and managed automatically, allowing for rapid iteration without persistent data storage.
+**H2 Configuration**:
+The H2 database is configured in the `application.properties` file, enabling the H2 console for easy access during development. The in-memory database is created and managed automatically, allowing for rapid iteration without persistent data storage.
 
-     ```java
-     spring.application.name=session3
+    ```java
+    spring.application.name=session3
     
     spring.datasource.url=jdbc:h2:mem:database
     spring.datasource.driver-class-name=org.h2.Driver
